@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+//const bcrypt = require("bcrypt");
 
 //middleware
 app.use(express.json());
@@ -16,7 +16,7 @@ const port = process.env.PORT || "3002";
 //database connection
 mongoose
   .connect(
-    "mongodb+srv://admin:rajamoni051412@test.q8lbl.mongodb.net/NewDatabase?retryWrites=true&w=majority",
+    "mongodb://root:root@test-shard-00-00.mxh9k.mongodb.net:27017,test-shard-00-01.mxh9k.mongodb.net:27017,test-shard-00-02.mxh9k.mongodb.net:27017/?ssl=true&replicaSet=atlas-7pqd3j-shard-0&authSource=admin&retryWrites=true&w=majority",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -34,65 +34,65 @@ app.listen(port, () => {
 });
 
 //model 1
-const blogSchema = mongoose.Schema({
-  name: {
-    type: String,
-    require: true,
-  },
-  email: {
-    type: String,
-    require: true,
-  },
-  password: {
-    type: String,
-    require: true,
-  },
-});
-const model = mongoose.model("Register", blogSchema);
+// const blogSchema = mongoose.Schema({
+//   name: {
+//     type: String,
+//     require: true,
+//   },
+//   email: {
+//     type: String,
+//     require: true,
+//   },
+//   password: {
+//     type: String,
+//     require: true,
+//   },
+// });
+// const model = mongoose.model("Register", blogSchema);
 
-//Routes of  Model 1
+// //Routes of  Model 1
 
-//Register
-app.post("/register", async (req, res) => {
-  try {
-    let existinguser = await model.findOne({ email: req.body.email });
-    if (existinguser) {
-      return res.status(400).json("user already exist in DB");
-    }
-    let hash = await bcrypt.hash(req.body.password, 10);
-    const data2 = new model({
-      name: req.body.name,
-      email: req.body.email,
-      password: hash,
-    });
-    const data3 = await data2.save();
-    res.json(data3);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
+// //Register
+// app.post("/register", async (req, res) => {
+//   try {
+//     let existinguser = await model.findOne({ email: req.body.email });
+//     if (existinguser) {
+//       return res.status(400).json("user already exist in DB");
+//     }
+//     let hash = await bcrypt.hash(req.body.password, 10);
+//     const data2 = new model({
+//       name: req.body.name,
+//       email: req.body.email,
+//       password: hash,
+//     });
+//     const data3 = await data2.save();
+//     res.json(data3);
+//   } catch (err) {
+//     res.status(400).json(err);
+//   }
+// });
 
-//login
-app.post("/login", async (req, res) => {
-  try {
-    const userpassword = await model.findOne({ email: req.body.email });
-    if (!userpassword) {
-      return res.status(400).json("Email not exist in DB");
-    }
-    const validpassword = await bcrypt.compare(
-      req.body.password,
-      userpassword.password
-    );
-    if (!validpassword) {
-      return res.status(400).json("Password not valid");
-    }
-    const webtoken = jwt.sign({ email: userpassword.email }, "Rakhan"); //secret key ,its like a ID card
+// //login
+// app.post("/login", async (req, res) => {
+//   try {
+//     const userpassword = await model.findOne({ email: req.body.email });
+//     if (!userpassword) {
+//       return res.status(400).json("Email not exist in DB");
+//     }
+//     const validpassword = await bcrypt.compare(
+//       req.body.password,
+//       userpassword.password
+//     );
+//     if (!validpassword) {
+//       return res.status(400).json("Password not valid");
+//     }
+//     const webtoken = jwt.sign({ email: userpassword.email }, "Rakhan"); //secret key ,its like a ID card
 
-    res.header("auth", webtoken).send(webtoken);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
+//     res.header("auth", webtoken).send(webtoken);
+//   } catch (err) {
+//     res.status(400).json(err);
+//   }
+// });
 
 //model 2
 const blogSchemamodel = mongoose.Schema({
@@ -209,6 +209,7 @@ const newblogSchema = mongoose.Schema({
 const client = mongoose.model("Clientlogo", newblogSchema);
 
 //Routes of model 3
+
 //client logo creation
 app.post("/logo", async (req, res) => {
   console.log("Inside post function");
