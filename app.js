@@ -16,7 +16,7 @@ const port = process.env.PORT || "3002";
 //database connection
 mongoose
   .connect(
-    "mongodb://root:root@test-shard-00-00.mxh9k.mongodb.net:27017,test-shard-00-01.mxh9k.mongodb.net:27017,test-shard-00-02.mxh9k.mongodb.net:27017/?ssl=true&replicaSet=atlas-7pqd3j-shard-0&authSource=admin&retryWrites=true&w=majority",
+    "mongodb+srv://admin:rajamoni051412@test.q8lbl.mongodb.net/NewDatabase?retryWrites=true&w=majority",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
