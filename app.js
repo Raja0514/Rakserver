@@ -181,14 +181,17 @@ app.put("/update/:id", (req, res) => {
   let upproject = req.body.project;
   let upyear = req.body.year;
   let uplocation = req.body.location;
+  let uplogo=req.body.logo;
   newmodel.findOneAndUpdate(
     { _id: upid },
     {
       $set: {
         photo: upphotos,
         project: upproject,
-        year: upyear,
         location: uplocation,
+        year: upyear,
+        logo:uplogo
+        
       },
     },
     { new: true }, //its giving updated value in postman tool
