@@ -229,7 +229,7 @@ const client = mongoose.model("Clientlogo", newblogSchema);
 //Routes of model 3
 
 //client logo creation
-app.post("/logo", async (req, res) => {
+app.post("/postlogo", async (req, res) => {
   console.log("Inside post function");
   const data = new client({
     logourl: req.body.logourl,
