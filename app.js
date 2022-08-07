@@ -129,28 +129,25 @@ const blogSchemamodel = mongoose.Schema({
     type: Number,
     require: true,
   },
-  logo: {
-    type: String,
-    require: true,
-  },
+  
 });
-const newmodel = mongoose.model("Logoproject", blogSchemamodel);
+const model1 = mongoose.model("project", blogSchemamodel);
 
 //Routes of model 2
 
 //creating new project
-app.post("/addpro ", async (req, res) => {
+app.post("/post", async (req, res) => {
   console.log("Inside post function");
-  const data = new newmodel({
+  const data = new model1({
     photo: req.body.photo,
     project: req.body.project,
     location: req.body.location,
     year: req.body.year,
-    logo: req.body.logo,
   });
   const data1 = await data.save();
   res.json(data1);
 });
+
 
 //get all the projects
 app.get("/data", async (req, res) => {
