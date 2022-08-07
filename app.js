@@ -219,7 +219,7 @@ app.delete("/delete/:id", (req, res) => {
 //model 3
 const newblogSchema = mongoose.Schema({
   logourl: {
-    type: String,
+    type: Number,
     require: true,
   },
   companyname: {
