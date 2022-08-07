@@ -129,6 +129,10 @@ const blogSchemamodel = mongoose.Schema({
     type: Number,
     require: true,
   },
+  logourl:{
+    type:String,
+    require:true
+  }
 });
 const newmodel = mongoose.model("Projects", blogSchemamodel);
 
@@ -142,6 +146,7 @@ app.post("/post ", async (req, res) => {
     project: req.body.project,
     location: req.body.location,
     year: req.body.year,
+    logourl:req.body.logourl
   });
   const data1 = await data.save();
   res.json(data1);
@@ -216,37 +221,6 @@ app.delete("/delete/:id", (req, res) => {
   });
 });
 
-//model 3
-const newblogSchema = mongoose.Schema({
-  logourl: {
-    type: Number,
-    require: true,
-  },
-  companyname: {
-    type: String,
-    require: true,
-  },
-});
-const client = mongoose.model("Clientlogo", newblogSchema);
-
-//Routes of model 3
-
-//client logo creation
-app.post("/postlogo", async (req, res) => {
-  console.log("Inside post function");
-  const data = new client({
-    logourl: req.body.logourl,
-    companyname: req.body.companyname,
-  });
-  const data1 = await data.save();
-  res.json(data1);
-});
-
-//get all logo
-app.get("/logo", async (req, res) => {
-  const data2 = await client.find();
-  res.json(data2);
-});
 
 //model 4
 const contactmodel = mongoose.Schema({
