@@ -95,22 +95,21 @@ app.post("/login", async (req, res) => {
 });
 
 const validateuser = (req, res, next) => {
-    var token = req.header("auth");
-    req.token = token;
-    next();
-  };
-  
-  app.get("/get", validateuser, async (req, res) => {
-    jwt.verify(req.token, "Rakhan", async (err, data) => {
-      if (err) {
-        res.sendStatus(403);
-      } else {
-        const data2 = await model.find().select(['-password']);
-        res.json(data2);
-      }
-    });
+  var token = req.header("auth");
+  req.token = token;
+  next();
+};
+
+app.get("/get", validateuser, async (req, res) => {
+  jwt.verify(req.token, "Rakhan", async (err, data) => {
+    if (err) {
+      res.sendStatus(403);
+    } else {
+      const data2 = await model.find().select(["-password"]);
+      res.json(data2);
+    }
   });
-  
+});
 
 //model 2
 const blogSchemamodel = mongoose.Schema({
@@ -136,7 +135,7 @@ const newmodel = mongoose.model("Projects", blogSchemamodel);
 //Routes of model 2
 
 //creating new project
-app.post("/post", async (req, res) => {
+app.post("/post ", async (req, res) => {
   console.log("Inside post function");
   const data = new newmodel({
     photo: req.body.photo,
@@ -223,16 +222,21 @@ const newblogSchema = mongoose.Schema({
     type: String,
     require: true,
   },
+  companyname: {
+    type: String,
+    require: true,
+  },
 });
 const client = mongoose.model("Clientlogo", newblogSchema);
 
 //Routes of model 3
 
 //client logo creation
-app.post("/logo", async (req, res) => {
+app.post("/postlogo", async (req, res) => {
   console.log("Inside post function");
   const data = new client({
     logourl: req.body.logourl,
+    companyname: req.body.companyname,
   });
   const data1 = await data.save();
   res.json(data1);
