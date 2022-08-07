@@ -157,7 +157,7 @@ app.post("/post", async (req, res) => {
 //get all the projects
 app.get("/data", async (req, res) => {
   try {
-    const data2 = await newmodel.find();
+    const data2 = await model1.find();
     res.json(data2);
   } catch (err) {
     res.send("Error" + err);
