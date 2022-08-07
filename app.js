@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(cors());
 
 //port
-const port = process.env.PORT || "3002";
+const port = process.env.PORT || 3002;
 
 //database connection
 mongoose
@@ -128,10 +128,13 @@ const blogSchemamodel = mongoose.Schema({
   year: {
     type: Number,
     require: true,
-  }
-
+  },
+  logo: {
+    type: String,
+    require: true,
+  },
 });
-const newmodel = mongoose.model("Projects", blogSchemamodel);
+const newmodel = mongoose.model("Logoproject", blogSchemamodel);
 
 //Routes of model 2
 
@@ -142,8 +145,8 @@ app.post("/post ", async (req, res) => {
     photo: req.body.photo,
     project: req.body.project,
     location: req.body.location,
-    year: req.body.year
-    
+    year: req.body.year,
+    logo: req.body.logo,
   });
   const data1 = await data.save();
   res.json(data1);
@@ -217,7 +220,6 @@ app.delete("/delete/:id", (req, res) => {
     }
   });
 });
-
 
 //model 4
 const contactmodel = mongoose.Schema({
