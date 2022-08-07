@@ -167,7 +167,7 @@ app.get("/data", async (req, res) => {
 //get particular projects
 app.get("/:id", async (req, res) => {
   try {
-    const data1 = await newmodel.findById(req.params.id);
+    const data1 = await model1.findById(req.params.id);
     res.json(data1);
   } catch (err) {
     res.send("Error" + err);
@@ -210,7 +210,7 @@ app.put("/update/:id", (req, res) => {
 //delete particular projects
 app.delete("/delete/:id", (req, res) => {
   let deleteid = req.params.id;
-  newmodel.findOneAndDelete({ _id: deleteid }, (err, data) => {
+  model1.findOneAndDelete({ _id: deleteid }, (err, data) => {
     if (err) {
       res.send("ERROR");
     } else {
