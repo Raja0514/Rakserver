@@ -139,7 +139,7 @@ const newmodel = mongoose.model("Logoproject", blogSchemamodel);
 //Routes of model 2
 
 //creating new project
-app.post("/post ", async (req, res) => {
+app.post("/addpro ", async (req, res) => {
   console.log("Inside post function");
   const data = new newmodel({
     photo: req.body.photo,
