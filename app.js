@@ -128,11 +128,8 @@ const blogSchemamodel = mongoose.Schema({
   year: {
     type: Number,
     require: true,
-  },
-  logourl:{
-    type:String,
-    require:true
   }
+
 });
 const newmodel = mongoose.model("Projects", blogSchemamodel);
 
@@ -145,8 +142,8 @@ app.post("/post ", async (req, res) => {
     photo: req.body.photo,
     project: req.body.project,
     location: req.body.location,
-    year: req.body.year,
-    logourl:req.body.logourl
+    year: req.body.year
+    
   });
   const data1 = await data.save();
   res.json(data1);
