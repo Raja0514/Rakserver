@@ -182,7 +182,7 @@ app.put("/update/:id", (req, res) => {
   let upyear = req.body.year;
   let uplocation = req.body.location;
   let uplogo=req.body.logo;
-  newmodel.findOneAndUpdate(
+  model1.findOneAndUpdate(
     { _id: upid },
     {
       $set: {
