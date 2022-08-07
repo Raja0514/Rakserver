@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(cors());
 
 //port
-const port = process.env.PORT || 3002;
+const port = process.env.PORT || "3002";
 
 //database connection
 mongoose
