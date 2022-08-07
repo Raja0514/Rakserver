@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(cors());
 
 //port
-const port = process.env.PORT || 3002;
+const port = process.env.PORT || "3002";
 
 //database connection
 mongoose
@@ -129,6 +129,10 @@ const blogSchemamodel = mongoose.Schema({
     type: Number,
     require: true,
   },
+  logo:{
+    type:String,
+    require:true
+  }
   
 });
 const model1 = mongoose.model("project", blogSchemamodel);
@@ -143,6 +147,7 @@ app.post("/post", async (req, res) => {
     project: req.body.project,
     location: req.body.location,
     year: req.body.year,
+    logo:req.body.logo
   });
   const data1 = await data.save();
   res.json(data1);
