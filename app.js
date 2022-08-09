@@ -8,7 +8,11 @@ const bcrypt = require("bcryptjs");
 
 //middleware
 app.use(express.json());
-app.use(cors());
+//Cors
+const corsOptions = {origin: "*",credentials: true,  optionSuccessStatus: 200,};
+//access-control-allow-credentials:true
+app.use(cors(corsOptions)); // Use this after the variable declaration
+
 
 //port
 const port = process.env.PORT || "3002";
@@ -182,6 +186,7 @@ app.put("/update/:id", (req, res) => {
   let upyear = req.body.year;
   let uplocation = req.body.location;
   let uplogo=req.body.logo;
+  
   newmodel.findOneAndUpdate(
     { _id: upid },
     {
