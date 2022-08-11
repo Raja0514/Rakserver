@@ -134,7 +134,7 @@ const blogSchemamodel = mongoose.Schema({
     require: true,
   },
   logo:{
-    type:String,
+    type:text,
     require:true
   }
   
